@@ -8,7 +8,7 @@ import { useTitle } from "components/setTitle";
 
 
 const LoginPage = ({pgtype=1}) => {
-    useTitle('adda – sign up | log in')
+    useTitle('binodon – sign up | log in')
     const theme = useTheme();
     const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
     const dispatch=useDispatch()

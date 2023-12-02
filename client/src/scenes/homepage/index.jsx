@@ -1,13 +1,15 @@
-import { Box, useMediaQuery } from "@mui/material";
+import { Box, Stack, useMediaQuery } from "@mui/material";
 import Navbar from "scenes/navbar";
 import { useTitle } from "components/setTitle";
 import { useSelector } from "react-redux";
 import UserWidget from "scenes/widgets/UserWidget";
 import CreatePost from "scenes/widgets/CreatePost"
 import Posts from "scenes/widgets/ShowPosts";
+import FriendList from "scenes/widgets/FriendList";
+import FriendSuggestions from "scenes/widgets/FriendSuggestions";
 
 const HomePage=()=>{
-    useTitle('adda – Home')
+    useTitle('binodon – Home')
     const isNonMobileScreens=useMediaQuery('(min-width:1000px)')
     const {_id,picturePath} =useSelector((state)=>state.user)
     return(
@@ -32,7 +34,10 @@ const HomePage=()=>{
                 </Box>
                 {isNonMobileScreens && (
                     <Box flexBasis='26%'>
-
+                        <Stack spacing={3}>
+                            <FriendList userId={_id} />
+                            <FriendSuggestions userId={_id} />
+                        </Stack>
                     </Box>
                 )}
             </Box>
