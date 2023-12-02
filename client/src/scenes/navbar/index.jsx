@@ -58,7 +58,7 @@ const Navbar = () => {
                         },
                     }}
                 >
-                    binodon
+                    adda
                 </Typography>
                 {isNonMobileScreens && (
                     <FlexBetween

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { Box, useMediaQuery } from "@mui/material";
 import Navbar from "scenes/navbar";
 import { useTitle } from "components/setTitle";
@@ -8,7 +7,7 @@ import CreatePost from "scenes/widgets/CreatePost"
 import Posts from "scenes/widgets/ShowPosts";
 
 const HomePage=()=>{
-    useTitle('binodon – Home')
+    useTitle('adda – Home')
     const isNonMobileScreens=useMediaQuery('(min-width:1000px)')
     const {_id,picturePath} =useSelector((state)=>state.user)
     return(
@@ -41,17 +40,4 @@ const HomePage=()=>{
     )
 }
 
-=======
-import { Box } from "@mui/material";
-import Navbar from "scenes/navbar";
-import { useTitle } from "components/setTitle";
-
-const HomePage=()=>{
-    useTitle('binodon – Home')
-    return(
-    <Box>
-        <Navbar/>
-    </Box>)
-}
->>>>>>> be4ece29ea09a84ee7ab4d0ef89ac3a3922309b8
 export default HomePage;

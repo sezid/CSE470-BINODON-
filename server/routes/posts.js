@@ -1,6 +1,5 @@
-<<<<<<< HEAD
 import express from "express";
-import { getFeedPosts, likePost, createPost, commentPost, getComments} from "../controllers/posts.js";
+import { getFeedPosts, createPost, editPost, commentPost, likePost, sharePost, getComments} from "../controllers/posts.js";
 import { verifyToken } from "../middleware/auth.js";
 import { upload } from '../middleware/filemanager.js'
 
@@ -13,23 +12,11 @@ router.get("/:id/comments", getComments);
 
 // Post
 router.post('/', verifyToken, upload.single('picture'), createPost)
+router.post("/:id/share", verifyToken, upload.none(), sharePost);
+
 /* UPDATE */
+router.patch("/:id/edit", verifyToken, editPost);
 router.patch("/:id/like", verifyToken, likePost);
 router.patch("/:id/comment", verifyToken, commentPost);
 
-=======
-import express from "express";
-import { getFeedPosts, getUserPosts, likePost } from "../controllers/posts.js";
-import { verifyToken } from "../middleware/auth.js";
-
-const router = express.Router();
-
-/* READ */
-router.get("/", verifyToken, getFeedPosts);
-router.get("/:userId/posts", verifyToken, getUserPosts);
-
-/* UPDATE */
-router.patch("/:id/like", verifyToken, likePost);
-
->>>>>>> be4ece29ea09a84ee7ab4d0ef89ac3a3922309b8
 export default router;
