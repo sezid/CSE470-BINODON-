@@ -9,7 +9,7 @@ import FriendList from "scenes/widgets/FriendList";
 import FriendSuggestions from "scenes/widgets/FriendSuggestions";
 
 const HomePage=()=>{
-    useTitle('binodon – Home')
+    useTitle('adda – Home')
     const isNonMobileScreens=useMediaQuery('(min-width:1000px)')
     const {_id,picturePath} =useSelector((state)=>state.user)
     return(
