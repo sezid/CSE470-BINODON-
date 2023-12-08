@@ -80,16 +80,16 @@ const UserWidget = ({ userId, picturePath, isProfile=false }) => {
                             variant="h4"
                             color={palette.neutral.dark}
                             fontWeight="500"
-                            sx={!isProfile && {
+                            sx={!isProfile? ({
                                 "&:hover": {
                                     color: palette.primary.light,
                                     cursor: "pointer",
                                 },
-                            }}
+                            }): undefined}
                         >
                             {firstName} {lastName}
                         </Typography>
-                        <Typography color={palette.neutral.dark}>{isProfile?frndCnt:friendCount} friends</Typography>
+                        <Typography color={palette.neutral.dark}>{Intl.NumberFormat('en',{notation:'compact'}).format(isProfile?frndCnt:friendCount)} friends</Typography>
                     </Box>
                 </FlexBetween>
                 <IconButton onClick={null}>
@@ -118,7 +118,7 @@ const UserWidget = ({ userId, picturePath, isProfile=false }) => {
                 <FlexBetween mb="0.5rem">
                     <Typography color={medium}>Profile views</Typography>
                     <Typography color={main} fontWeight="500">
-                        {profileViews}
+                        {Intl.NumberFormat('en',{notation:'compact'}).format(profileViews)}
                     </Typography>
                 </FlexBetween>
                 <FlexBetween>

@@ -1,7 +1,7 @@
 import { Box, Link, Tooltip, Typography, useTheme } from "@mui/material";
 import FlexBetween from "../../components/FlexBetween";
 import UserImage from "../../components/UserImage";
-import timeDiff from "utils";
+import {timeDiff} from "utils";
 import { useState } from "react";
 
 const UserInfo = ({ personId, name, subtitle=null, userPicturePath, isProfile=false, time=null }) => {
@@ -19,7 +19,7 @@ const UserInfo = ({ personId, name, subtitle=null, userPicturePath, isProfile=fa
                         variant="h5"
                         fontWeight="500"
                         underline='none'
-                        sx={!isProfile && {
+                        sx={isProfile?null:{
                             "&:hover": {
                                 color: palette.neutral.light,
                                 cursor: "pointer",
@@ -32,7 +32,7 @@ const UserInfo = ({ personId, name, subtitle=null, userPicturePath, isProfile=fa
                     <Box sx={{display: 'flex',flexDirection: 'row', alignContent: 'flex-start' }} spacing={0}>
                         {time && 
                             <Tooltip title={!clicked?tym:tymdiff} disableInteractive>
-                                <Typography color={palette.neutral.medium} onClick={()=>setclicked(!clicked)} fontSize="0.75rem">
+                                <Typography color={palette.neutral.medium} onClick={()=>setclicked(!clicked)} fontSize="0.75rem" sx={{"&:hover":{cursor:"pointer"}}}>
                                     {clicked?tym:tymdiff}
                                 </Typography>
                             </Tooltip>

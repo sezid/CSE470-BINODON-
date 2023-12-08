@@ -6,13 +6,13 @@ const UserSchema=new mongoose.Schema(
         firstName:{
             type:String,
             required:true,
-            min:2,
+            min:1,
             max:50,
         },
         lastName:{
             type:String,
             required:true,
-            min:2,
+            min:1,
             max:50,
         },
         email:{
@@ -47,6 +47,10 @@ const UserSchema=new mongoose.Schema(
     },
     {timestamps:true}
 )
+
+UserSchema.index({firstName:'text',lastName:'text',location:'text',occupation:'text'},
+    {name:'user Index', weights: {firstName: 10, lastName: 10, location: 2, occupation: 1}});
+
 
 const User=mongoose.model('User',UserSchema);
 export default User;
