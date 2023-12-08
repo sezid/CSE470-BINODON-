@@ -9,9 +9,9 @@ import FriendList from "scenes/widgets/FriendList";
 import FriendSuggestions from "scenes/widgets/FriendSuggestions";
 
 const HomePage=()=>{
-    useTitle('adda – Home')
+    useTitle('binodon – Home')
     const isNonMobileScreens=useMediaQuery('(min-width:1000px)')
-    const {_id,picturePath} =useSelector((state)=>state.user)
+    const {_id,picturePath,friendCount} =useSelector((state)=>state.user)
     return(
         <Box>
             <Navbar/>
@@ -35,7 +35,7 @@ const HomePage=()=>{
                 {isNonMobileScreens && (
                     <Box flexBasis='26%'>
                         <Stack spacing={3}>
-                            <FriendList userId={_id} />
+                            <FriendList userId={_id} length={friendCount} />
                             <FriendSuggestions userId={_id} />
                         </Stack>
                     </Box>

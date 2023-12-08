@@ -3,7 +3,7 @@ import {
     LocationOnOutlined,
     WorkOutlineOutlined,
 } from "@mui/icons-material";
-import { Box, Typography, Divider, useTheme, Skeleton, Stack } from "@mui/material";
+import { Box, Typography, Divider, useTheme, Skeleton, Stack, IconButton } from "@mui/material";
 import UserImage from "components/UserImage";
 import FlexBetween from "components/FlexBetween";
 import WidgetWrapper from "components/WidgetWrapper";
@@ -16,8 +16,8 @@ const UserWidget = ({ userId, picturePath, isProfile=false }) => {
     const [loaded, setLoaded] = useState(false);
     const { palette } = useTheme();
     const navigate = useNavigate();
+    const friendCount = useSelector(state=>state.user.friendCount)
     const token = useSelector((state) => state.token);
-    const dark = palette.neutral.dark;
     const medium = palette.neutral.medium;
     const main = palette.neutral.main;
 
@@ -31,10 +31,9 @@ const UserWidget = ({ userId, picturePath, isProfile=false }) => {
             if (!res.ok) return;
             setUser(data);
         }).catch(err => {
-            console.errror(err)
+            console.error(err)
         })
     };
-    const friendCount = useSelector(state => state.user.friendCount)
 
     useEffect(() => {
         getUser();
@@ -62,7 +61,8 @@ const UserWidget = ({ userId, picturePath, isProfile=false }) => {
         location,
         occupation,
         profileViews,
-        createdAt
+        createdAt,
+        friendCount:frndCnt
     } = user;
     const d=new Date(createdAt)
 
@@ -78,7 +78,7 @@ const UserWidget = ({ userId, picturePath, isProfile=false }) => {
                     <Box>
                         <Typography
                             variant="h4"
-                            color={dark}
+                            color={palette.neutral.dark}
                             fontWeight="500"
                             sx={!isProfile && {
                                 "&:hover": {
@@ -89,10 +89,12 @@ const UserWidget = ({ userId, picturePath, isProfile=false }) => {
                         >
                             {firstName} {lastName}
                         </Typography>
-                        <Typography color={palette.neutral.dark}>{friendCount} friends</Typography>
+                        <Typography color={palette.neutral.dark}>{isProfile?frndCnt:friendCount} friends</Typography>
                     </Box>
                 </FlexBetween>
-                <ManageAccountsOutlined />
+                <IconButton onClick={null}>
+                    <ManageAccountsOutlined />
+                </IconButton>
             </FlexBetween>
 
             <Divider />

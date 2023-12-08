@@ -18,12 +18,16 @@ const __dirname = path.dirname(__filename)
 dotenv.config()
 const app=express()
 app.use(express.json())
+app.use('*', cors({ 
+    AccessControlAllowOrigin: '*',  
+    origin: '*',  
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE' 
+}))
 app.use(helmet())
 app.use(helmet.crossOriginResourcePolicy({policy:"cross-origin"}))
 app.use(morgan('common'))
 app.use(bodyParser.json({limit:"15mb",extended:true}))
 app.use(bodyParser.urlencoded({limit:"15mb",extended:true}))
-app.use(cors())
 app.use("/assets",express.static(path.join(__dirname,'public/assets')))
 
 
@@ -43,4 +47,3 @@ mongoose.connect(process.env.MONGO_URL,{
     app.listen(PORT,()=>console.log('\n\x1b[36m%s\x1b[0m\n\x1b[35mPORT: %s\x1b[0m', 'SERVER STARTED!',PORT))
 
 }).catch((error)=>console.error('\x1b[31m%s\x1b[0m',error))
-

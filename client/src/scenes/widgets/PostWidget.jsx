@@ -18,7 +18,6 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setLikes, setPosts } from "state";
 import Dropzone from "react-dropzone";
-import timeDiff from "utils";
 
 const PostWidget = ({ post, isProfile = false }) => {
     const isShared = post.share?.isShared || false;
@@ -191,6 +190,10 @@ const PostWidget = ({ post, isProfile = false }) => {
                         alt="post"
                         style={{ borderRadius: "0.75rem", marginTop: "0.75rem" }}
                         src={`${process.env.REACT_APP_HOSTURL}/assets/${picturePath}`}
+                        onError={({ currentTarget })=>{
+                            currentTarget.onerror = null;
+                            currentTarget.src=`${process.env.REACT_APP_HOSTURL}/assets/404.png`
+                        }}
                     />
                 )}</>)}
             {edit &&
@@ -254,7 +257,11 @@ const PostWidget = ({ post, isProfile = false }) => {
                                 <FavoriteBorderOutlined />
                             )}
                         </IconButton>
-                        <Typography>{likeCount}</Typography>
+                        <Tooltip title={likeCount>1e3?likeCount:null} placement="top" disableInteractive>
+                            <Typography>
+                                {Intl.NumberFormat('en',{notation:'compact'}).format(likeCount)}
+                            </Typography>
+                        </Tooltip>
                     </FlexBetween>
 
                     <FlexBetween gap="0.3rem" onClick={() => setIsComments(!isComments)}>
@@ -263,7 +270,11 @@ const PostWidget = ({ post, isProfile = false }) => {
                                 <ChatBubbleOutlineOutlined />
                             </IconButton>
                         </Tooltip>
-                        <Typography sx={{ cursor: 'pointer' }}>{commentsCount}</Typography>
+                        <Tooltip title={commentsCount>1e3?commentsCount:null} disableInteractive placement="top">
+                            <Typography sx={{ cursor: 'pointer' }}>
+                                {Intl.NumberFormat('en',{notation:'compact'}).format(commentsCount)}
+                            </Typography>
+                        </Tooltip>
                     </FlexBetween>
                     <FlexBetween gap="0.3rem">
                         <Tooltip title='Share' disableInteractive>
@@ -273,14 +284,14 @@ const PostWidget = ({ post, isProfile = false }) => {
                                 </SvgIcon>
                             </IconButton>
                         </Tooltip>
-                        <Typography>{shareCount}</Typography>
+                        <Tooltip title={shareCount>1e3?shareCount:null} placement="top" disableInteractive>
+                            <Typography>
+                                {Intl.NumberFormat('en',{notation:'compact'}).format(shareCount)}
+                            </Typography>
+                        </Tooltip>
                     </FlexBetween>
                 </FlexBetween>
-                {/* <IconButton color="error">
-                    <DeleteForeverOutlined />
-                </IconButton> */}
             </FlexBetween>
-
             {isComments && <CommentSection postId={postId} userId={userId} />}
         </WidgetWrapper>
     );

@@ -8,7 +8,7 @@ import { useTitle } from "components/setTitle";
 
 
 const LoginPage = ({pgtype=1}) => {
-    useTitle('adda – sign up | log in')
+    useTitle('binodon – sign up | log in')
     const theme = useTheme();
     const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
     const dispatch=useDispatch()
@@ -22,7 +22,7 @@ const LoginPage = ({pgtype=1}) => {
             >
             <FlexBetween>
                 <Typography fontWeight="bold" fontSize="32px" color="primary">
-                    adda
+                    binodon
                 </Typography>
                 <IconButton onClick={() => dispatch(changeMode())}>
                         {theme.palette.mode === "dark" ? (
